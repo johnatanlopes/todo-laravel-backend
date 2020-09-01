@@ -23,7 +23,8 @@ class TarefaController extends Controller
         try {
             $status = isset($request->status) ? $request->status : "aberto";
 
-            $tarefas = Tarefa::where("status", $status)
+            $tarefas = Tarefa::where("usuario_id", auth()->user()->id)
+                ->where("status", $status)
                 ->with([
                     "marcadores" => function($query) {
                         $query->select("marcadores.id", "marcadores.descricao");
@@ -46,6 +47,7 @@ class TarefaController extends Controller
             DB::beginTransaction();
 
             $tarefa = Tarefa::create([
+                "usuario_id" => auth()->user()->id,
                 "titulo" => $request->titulo,
                 "descricao" => $request->descricao
             ]);
@@ -81,7 +83,9 @@ class TarefaController extends Controller
     public function closeTask($id)
     {
         try {
-            $tarefa = Tarefa::find($id);
+            $tarefa = Tarefa::where("usuario_id", auth()->user()->id)
+                ->where("id", $id)
+                ->firstOrFail();
 
             if ($tarefa->status == "fechado")
             {
@@ -101,7 +105,10 @@ class TarefaController extends Controller
     public function destroy($id)
     {
         try {
-            Tarefa::destroy($id);
+            Tarefa::where("usuario_id", auth()->user()->id)
+                ->where("id", $id)
+                ->delete();
+
             return response()->json(["message" => "Tarefa excluída"], 200);
 
         } catch (Exception $e) {

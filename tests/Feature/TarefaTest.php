@@ -19,6 +19,7 @@ class TarefaTest extends TestCase
 
         $usuario = User::first();
         $token = JWTAuth::fromUser($usuario);
+        $this->actingAs($usuario);
 
         $this->withHeaders([
             'Authorization' => 'Bearer ' . $token,
