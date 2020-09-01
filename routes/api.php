@@ -23,3 +23,5 @@ Route::get('/tarefas', 'TarefaController@index');
 Route::post('/tarefa', 'TarefaController@store');
 Route::put('/tarefa/{id}', 'TarefaController@closeTask');
 Route::delete('/tarefa/{id}', 'TarefaController@destroy');
+
+Route::get('/marcadores', 'MarcadorController@index');
