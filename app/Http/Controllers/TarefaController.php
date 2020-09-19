@@ -30,7 +30,7 @@ class TarefaController extends Controller
                         $query->select("marcadores.id", "marcadores.descricao");
                     }
                 ])
-                ->select("id", "titulo", "descricao", "created_at")
+                ->select("id", "titulo", "descricao", DB::raw('DATE_FORMAT(created_at, "%d/%m/%y %H:%i") as criado'))
                 ->get();
 
             return response()->json($tarefas, 200);
