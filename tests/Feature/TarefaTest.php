@@ -74,7 +74,7 @@ class TarefaTest extends TestCase
                 'id',
                 'titulo',
                 'descricao',
-                'created_at',
+                'criado',
                 'marcadores'
             ]
         ]);
@@ -89,7 +89,7 @@ class TarefaTest extends TestCase
                 'id',
                 'titulo',
                 'descricao',
-                'created_at',
+                'criado',
                 'marcadores'
             ]
         ]);
@@ -104,7 +104,7 @@ class TarefaTest extends TestCase
                 'id',
                 'titulo',
                 'descricao',
-                'created_at',
+                'criado',
                 'marcadores'
             ]
         ]);
